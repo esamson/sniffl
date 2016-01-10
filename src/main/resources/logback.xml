@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <timestamp key="startTime" datePattern="yyyyMMdd'T'HHmmssSSS"/>
+    <appender name="DEVLOG" class="ch.qos.logback.core.FileAppender">
+        <file>${logdir:-/tmp}/sniffl-${startTime}.log</file>
+        <encoder>
+            <pattern>%d [%thread][%level] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="${loglevel:-error}"/>
+        <appender-ref ref="STDERR"/>
+        <appender-ref ref="DEVLOG"/>
+    </root>
+</configuration>
