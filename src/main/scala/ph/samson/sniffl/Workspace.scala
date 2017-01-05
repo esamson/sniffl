@@ -345,19 +345,24 @@ class Workspace(workingDir: Path) extends StrictLogging {
 
   def deleteDir(dir: Path): Unit = {
     if (Files.exists(dir)) {
-      Files.walkFileTree(dir, new SimpleFileVisitor[Path] {
-        override def visitFile(file: Path,
-                               attrs: BasicFileAttributes): FileVisitResult = {
-          Files.delete(file)
-          FileVisitResult.CONTINUE
-        }
+      Files.walkFileTree(
+        dir,
+        new SimpleFileVisitor[Path] {
+          override def visitFile(
+              file: Path,
+              attrs: BasicFileAttributes): FileVisitResult = {
+            Files.delete(file)
+            FileVisitResult.CONTINUE
+          }
 
-        override def postVisitDirectory(dir: Path,
-                                        exc: IOException): FileVisitResult = {
-          Files.delete(dir)
-          FileVisitResult.CONTINUE
+          override def postVisitDirectory(
+              dir: Path,
+              exc: IOException): FileVisitResult = {
+            Files.delete(dir)
+            FileVisitResult.CONTINUE
+          }
         }
-      })
+      )
     }
   }
 

@@ -140,7 +140,7 @@ object Main extends LazyLogging {
 
     val duplicateNames: Set[(String, String)] = nameMap
       .groupBy {
-        case (_, (title, ext)) => title -> ext
+        case (_, (title, ext)) => title.toLowerCase -> ext.toLowerCase
       }
       .filter {
         case (_, group) => group.size > 1
@@ -149,11 +149,12 @@ object Main extends LazyLogging {
 
     nameMap.map {
       case (photo, (title, ext)) =>
-        val mappedName = if (duplicateNames.contains(title -> ext)) {
-          photo -> s"${title.take(253 - photo.id.length - ext.length)}.${photo.id}.$ext"
-        } else {
-          photo -> s"${title.take(254 - ext.length)}.$ext"
-        }
+        val mappedName =
+          if (duplicateNames.contains(title.toLowerCase -> ext.toLowerCase)) {
+            photo -> s"${title.take(253 - photo.id.length - ext.length)}.${photo.id}.$ext"
+          } else {
+            photo -> s"${title.take(254 - ext.length)}.$ext"
+          }
         logger.debug(s"mapped name: $mappedName")
         mappedName
     }
