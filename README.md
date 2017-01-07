@@ -7,19 +7,19 @@ This is my goodbye to Flickr. Downloads all your photos and videos.
 You need:
 
 * Java 8
-* [sniffl JAR](https://github.com/esamson/sniffl/releases/download/v1/sniffl-v1.jar)
+* [sniffl JAR](https://github.com/esamson/sniffl/releases/download/v2/sniffl-v2.jar)
 
 Launch:
 
 ```
-$ java -jar sniffl-v1.jar
+$ java -jar sniffl-v2.jar
 ```
 
 Works in the current directory unless a target directory is provided as an
 argument.
 
 ```
-$ java -jar sniffl-v1.jar /path/to/dir
+$ java -jar sniffl-v2.jar /path/to/dir
 ```
 
 ## Features
